@@ -38,13 +38,6 @@ jobs:
         name: MutagenMon-intel.app
         path: MutagenMon-intel.zip
 
-    - name: Upload Nightly
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-      run: |
-        for f in $(find . -name '*.zip'); do
-          gh release upload nightly $f
-        done
-
   build_macos_arm:
     runs-on: macos-14
 #    defaults:
@@ -71,6 +64,12 @@ jobs:
         name: MutagenMon-arm.app
         path: MutagenMon-arm.zip
 
+upload_nightly:
+  needs:
+    - build_macos_intel
+    - build_macos_arm
+  runs-on: ubuntu-latest
+    
     - name: Upload Nightly
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       run: |
