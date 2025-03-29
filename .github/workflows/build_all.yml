@@ -20,7 +20,7 @@ jobs:
 
     - name: Build
       working-directory: ${{runner.workspace}}
-      run: ./build.sh
+      run:  bash build.sh
 
     - name: Create Archive
       working-directory: ${{runner.workspace}}
