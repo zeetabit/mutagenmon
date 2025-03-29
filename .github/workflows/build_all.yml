@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-13
     defaults:
       run:
-        working-directory: ${{runner.workspace}}
+        working-directory: ./build
 
     steps:
     - uses: actions/checkout@v4
