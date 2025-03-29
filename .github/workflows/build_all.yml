@@ -65,11 +65,13 @@ jobs:
         path: MutagenMon-arm.zip
 
 upload_nightly:
-  needs:
-    - build_macos_intel
-    - build_macos_arm
+  needs: [
+    'build_macos_intel',
+    'build_macos_arm'
+  ]
   runs-on: ubuntu-latest
-    
+
+  steps:
     - name: Upload Nightly
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       run: |
