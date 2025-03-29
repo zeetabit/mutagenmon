@@ -39,7 +39,7 @@ jobs:
         path: MutagenMon-intel.zip
 
     - name: Upload Release Asset
-      if: ${{startsWith(github.ref, 'refs/tags/') }}
+      if: startsWith(github.ref, 'refs/tags/')
       run: |
         for f in $(find . -name '*.zip'); do
           gh release upload ${{ github.ref_name }} $f
