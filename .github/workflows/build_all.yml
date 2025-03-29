@@ -23,6 +23,9 @@ jobs:
       with:
         fetch-depth: 0
 
+    - name: Install dependencies
+      run: brew install go
+
     - name: Build
       run:  bash build.sh
 
