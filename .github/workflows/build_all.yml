@@ -1,0 +1,33 @@
+name: Build Binaries
+
+on:
+  push:
+    branches-ignore:
+    - nightly
+  pull_request:
+    branches-ignore:
+    - nightly
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build_macos_intel:
+    runs-on: macos-13
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build
+      working-directory: ${{runner.workspace}}
+      run: ./build.sh
+
+    - name: Create Archive
+      working-directory: ${{runner.workspace}}
+      run: cd $GITHUB_WORKSPACE && zip -r ${{runner.workspace}}/MutagenMon-intel.zip MutagenMon.app
+
+    - name: Save Archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: MutagenMon
+        path: ${{runner.workspace}}/MutagenMon-intel.zip
