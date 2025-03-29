@@ -64,17 +64,17 @@ jobs:
         name: MutagenMon-arm.app
         path: MutagenMon-arm.zip
 
-upload_nightly:
-  needs: [
-    'build_macos_intel',
-    'build_macos_arm'
-  ]
-  runs-on: ubuntu-latest
+  upload_nightly:
+    needs: [
+      'build_macos_intel',
+      'build_macos_arm'
+    ]
+    runs-on: ubuntu-latest
 
-  steps:
-    - name: Upload Nightly
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-      run: |
-        for f in $(find . -name '*.zip'); do
-          gh release upload nightly $f
-        done
+    steps:
+      - name: Upload Nightly
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        run: |
+          for f in $(find . -name '*.zip'); do
+            gh release upload nightly $f
+          done
