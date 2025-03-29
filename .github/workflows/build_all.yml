@@ -27,10 +27,10 @@ jobs:
       run:  bash build.sh
 
     - name: Create Archive
-      run: cd $GITHUB_WORKSPACE && zip -r ${{runner.workspace}}/MutagenMon-intel.zip MutagenMon.app
+      run: cd $GITHUB_WORKSPACE && zip -r ./build/MutagenMon-intel.zip MutagenMon.app
 
     - name: Save Archive
       uses: actions/upload-artifact@v4
       with:
         name: MutagenMon
-        path: ${{runner.workspace}}/MutagenMon-intel.zip
+        path: ./build/MutagenMon-intel.zip
