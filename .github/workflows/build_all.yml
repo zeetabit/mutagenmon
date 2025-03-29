@@ -37,3 +37,9 @@ jobs:
       with:
         name: MutagenMon
         path: MutagenMon-intel.zip
+
+    - name: Upload Release Asset
+      run: |
+        for f in $(find . -name '*.zip'); do
+          gh release upload ${{ steps.release.outputs.tag_name }} $f
+        done
