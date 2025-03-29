@@ -32,6 +32,16 @@ How to build
 ./build.sh
 ```
 
+How to download
+------------
+Go to releases and download latest nightly release.
+
+As this APP is not signed, you need to open app on modern OSX version you need to:
+1) try open MutagenMon.app
+2) Settings -> Privacy & Security -> scroll to bottom and find for "MutagenMon.app was blocked to protect your Mac." -> click "Open Anyway".
+3) open MutagenMon.app again
+p.s. do not open untrusted apps from unknown developers, in current case you may check sourcecode there at this repo
+
 Alternatives
 ----------
 [Mutagen Monitor](https://github.com/andrewmed/mutagenmon) was inspired by [MutagenMon](https://github.com/rualark/MutagenMon) thanks to @rualark! But that one seems to be aiming Windows plus there is a "python vs go" difference
