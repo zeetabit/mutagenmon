@@ -14,16 +14,19 @@ env:
 jobs:
   build_macos_intel:
     runs-on: macos-13
+    defaults:
+      run:
+        working-directory: ${{runner.workspace}}
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Build
-      working-directory: ${{runner.workspace}}
-      run:  bash ./build.sh
+      run:  bash build.sh
 
     - name: Create Archive
-      working-directory: ${{runner.workspace}}
       run: cd $GITHUB_WORKSPACE && zip -r ${{runner.workspace}}/MutagenMon-intel.zip MutagenMon.app
 
     - name: Save Archive
