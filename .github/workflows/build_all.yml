@@ -44,3 +44,36 @@ jobs:
         for f in $(find . -name '*.zip'); do
           gh release upload nightly $f
         done
+
+  build_macos_arm:
+    runs-on: macos-14
+#    defaults:
+#      run:
+#        working-directory: ./build
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install dependencies
+      run: brew install go
+
+    - name: Build
+      run:  bash build.sh
+
+    - name: Create Archive
+      run: cd $GITHUB_WORKSPACE && zip -r MutagenMon-arm.zip MutagenMon.app
+
+    - name: Save Archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: MutagenMon-arm.app
+        path: MutagenMon-arm.zip
+
+    - name: Upload Nightly
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      run: |
+        for f in $(find . -name '*.zip'); do
+          gh release upload nightly $f
+        done
